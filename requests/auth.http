@@ -1,7 +1,7 @@
 ### Variables
 @baseUrl = http://localhost:3000
 # Collez ici le token retourné dans le header "set-auth-token" après connexion
-@token = "FF2hXlw6UvXnp0g1qtupBPw0uAVgLgWa.JdKiMdQLxvl5fYlfW3m9R+lQj9237hXTLDB3zMbdAC4="
+@token = Q90Iy0ia3o030ch0pMLjgZjJozXwgfeK
 
 ### Inscription
 POST {{baseUrl}}/api/auth/sign-up/email
@@ -31,4 +31,9 @@ Content-Type: application/json
 
 ### Mon profil (token requis)
 GET {{baseUrl}}/api/auth/get-session
+Authorization: Bearer {{token}}
+
+
+### Mon profil
+GET {{baseUrl}}/api/me
 Authorization: Bearer {{token}}

@@ -1,7 +1,7 @@
 ### Variables
 @baseUrl = http://localhost:3000
-@token = "F2hXlw6UvXnp0g1qtupBPw0uAVgLgWa.JdKiMdQLxvl5fYlfW3m9R+lQj9237hXTLDB3zMbdAC4="
-@productId ="cmqj9jizf0000a4pko1e0lw3o"
+@token = Q90Iy0ia3o030ch0pMLjgZjJozXwgfeK
+@productId = cmqj9jizf0000a4pko1e0lw3o
 
 ### Lister les produits (public, sans auth)
 GET {{baseUrl}}/api/products
@@ -53,3 +53,7 @@ Authorization: Bearer {{token}}
 ### Supprimer un produit
 DELETE {{baseUrl}}/api/products/{{productId}}
 Authorization: Bearer {{token}}
+
+
+### Recherche avec pagination
+GET {{baseUrl}}/api/products?search=shirt&page=1&limit=5&minPrice=10&maxPrice=50
