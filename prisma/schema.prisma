@@ -14,14 +14,16 @@ datasource db {
 
 model User {
   id            String    @id @default(cuid())
-  email         String    @unique
   name          String?
-  createdAt     DateTime  @default(now())
-  orders        Order[]
-
-  // Champs requis par Better-Auth
-  emailVerified Boolean   @default(false)
+  email         String    @unique
+  emailVerified Boolean?
   image         String?
+  
+  // Add these missing timestamp fields
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  orders        Order[]
   sessions      Session[]
   accounts      Account[]
 }
@@ -40,15 +42,19 @@ model Session {
 
 model Account {
   id           String    @id @default(cuid())
-  userId       String
   accountId    String
   providerId   String
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken  String?
   refreshToken String?
   idToken      String?
   expiresAt    DateTime?
   password     String?
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Add these missing timestamp fields
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 model Verification {
