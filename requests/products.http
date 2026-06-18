@@ -1,0 +1,55 @@
+### Variables
+@baseUrl = http://localhost:3000
+@token = "F2hXlw6UvXnp0g1qtupBPw0uAVgLgWa.JdKiMdQLxvl5fYlfW3m9R+lQj9237hXTLDB3zMbdAC4="
+@productId ="cmqj9jizf0000a4pko1e0lw3o"
+
+### Lister les produits (public, sans auth)
+GET {{baseUrl}}/api/products
+
+###
+
+### Créer un produit sans auth → doit retourner 401
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "T-Shirt Basic",
+  "price": 29.99,
+  "stock": 100
+}
+
+###
+
+### Créer un produit avec auth
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "T-Shirt Basic",
+  "description": "100% coton bio",
+  "price": 29.99,
+  "stock": 100
+}
+
+###
+
+### Détail d'un produit
+GET {{baseUrl}}/api/products/{{productId}}
+
+###
+
+### Modifier le stock
+PATCH {{baseUrl}}/api/products/{{productId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "stock": 75
+}
+
+###
+
+### Supprimer un produit
+DELETE {{baseUrl}}/api/products/{{productId}}
+Authorization: Bearer {{token}}
