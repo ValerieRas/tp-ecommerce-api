@@ -1,0 +1,58 @@
+### Variables
+@baseUrl = http://localhost:3000
+@token = Q90Iy0ia3o030ch0pMLjgZjJozXwgfeK
+@productId = cmqja387v0000f4pk78xqmlh2
+@orderId = cmqjaneik0000g0pkag70qx34
+
+### Lister mes commandes
+GET {{baseUrl}}/api/orders
+Authorization: Bearer {{token}}
+
+###
+
+### Créer une commande
+POST {{baseUrl}}/api/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "items": [
+    { "productId": {{productId}}, "quantity": 2 }
+  ]
+}
+
+###
+
+### Commande avec stock insuffisant → doit retourner 409
+POST {{baseUrl}}/api/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "items": [
+    { "productId": {{productId}}, "quantity": 99999 }
+  ]
+}
+
+###
+
+### Détail d'une commande
+GET {{baseUrl}}/api/orders/{{orderId}}
+Authorization: Bearer {{token}}
+
+###
+
+### Changer le statut
+PATCH {{baseUrl}}/api/orders/{{orderId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "CONFIRMED"
+}
+
+###
+
+### Accéder à une commande inexistante → doit retourner 404
+GET {{baseUrl}}/api/orders/id-qui-nexiste-pas
+Authorization: Bearer {{token}}
